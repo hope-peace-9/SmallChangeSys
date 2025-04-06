@@ -63,16 +63,20 @@ public class SmallChangeSys {
                         System.out.print("出金価額を入力してください：");
                         if (scanner.hasNextDouble()) {
                             money = scanner.nextDouble();
-                            if (money <= balance) {
-                                System.out.print("内容説明：");
-                                note = scanner.next();
-                                balance -= money;
-                                date = new Date();
-                                details += "\n" + note + "\t-" + money + "\t" + sdf.format(date)
-                                        + "\t" + "TOTAL\t" + balance;
-                                break;
+                            if (money >= 0) {
+                                if (money <= balance) {
+                                    System.out.print("内容説明：");
+                                    note = scanner.next();
+                                    balance -= money;
+                                    date = new Date();
+                                    details += "\n" + note + "\t-" + money + "\t" + sdf.format(date)
+                                            + "\t" + "TOTAL\t" + balance;
+                                    break;
+                                } else {
+                                    System.out.println("全資産額以下に入力してください!");
+                                }
                             } else {
-                                System.out.println("全資産額以下に入力してください!");
+                                System.out.println("正数を入力してください!");
                             }
                         } else {
                             System.out.println("数値を入力してください!");
