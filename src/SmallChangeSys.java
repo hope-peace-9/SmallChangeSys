@@ -37,18 +37,20 @@ public class SmallChangeSys {
                     System.out.println(details);
                     break;
                 case "2":
-                    System.out.println("入金価額入力してください：");
+                    System.out.println("入金価額入力してください，「0」を入力するとメニューに戻ります：");
                     while (true) {
                         if (scanner.hasNextDouble()) {
                             double temp = scanner.nextDouble();
-                            if (temp >= 0) {
+                            if (temp > 0) {
                                 money = temp;
                                 balance += money;
 
                                 date = new Date();
                                 details += "\n入金価額\t+" + money + "\t" + sdf.format(date) + "\t" + "TOTAL\t" + balance;
                                 break;
-                            } else if (temp < 0) {
+                            } else if (temp == 0) {
+                                break;
+                            } else {
                                 System.out.println("０円以上入力してください!");
                             }
                         } else {
@@ -60,10 +62,10 @@ public class SmallChangeSys {
                 case "3":
                     System.out.println("3.出 金 明 細");
                     while (true) {
-                        System.out.print("出金価額を入力してください：");
+                        System.out.print("出金価額を入力してください，「0」を入力するとメニューに戻ります：");
                         if (scanner.hasNextDouble()) {
                             money = scanner.nextDouble();
-                            if (money >= 0) {
+                            if (money > 0) {
                                 if (money <= balance) {
                                     System.out.print("内容説明：");
                                     note = scanner.next();
@@ -72,9 +74,12 @@ public class SmallChangeSys {
                                     details += "\n" + note + "\t-" + money + "\t" + sdf.format(date)
                                             + "\t" + "TOTAL\t" + balance;
                                     break;
+
                                 } else {
                                     System.out.println("全資産額以下に入力してください!");
                                 }
+                            } else if (money == 0) {
+                                break;
                             } else {
                                 System.out.println("正数を入力してください!");
                             }
